@@ -14,6 +14,7 @@
   import PwaStatus from "../lib/components/PwaStatus.svelte";
   import ProgressRing from "../lib/components/ProgressRing.svelte";
   import PregnancySettings from "../lib/components/PregnancySettings.svelte";
+  import MonthComparison from "../lib/components/MonthComparison.svelte";
   import Timeline from "../lib/components/Timeline.svelte";
   import DataControls from "../lib/components/DataControls.svelte";
   import Glossary from "../lib/components/Glossary.svelte";
@@ -222,6 +223,11 @@
             dates.
           </p>
         </div>
+        <MonthComparison
+          months28={progress.months28}
+          calendarMonths={progress.calendarMonths}
+          startDate={progress.startDate}
+        />
       </section>
       <section class="card journey-card">
         <div class="card-heading">

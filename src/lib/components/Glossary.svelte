@@ -2,6 +2,16 @@
   import Icon from "./Icon.svelte";
   const terms = [
     {
+      term: "28-day months",
+      definition:
+        "A counting shortcut: one block of four 7-day weeks. Divide elapsed days by 28 for completed blocks and remaining days. Forty weeks makes 10 of these blocks. This is separate from the 28-day menstrual-cycle assumption used in last-period dating.",
+    },
+    {
+      term: "Calendar months elapsed",
+      definition:
+        "Completed calendar months and remaining days from your pregnancy dating start. Months have 28–31 days. Each month is anchored to the starting day, or the last day when a shorter month has no matching date. This counts elapsed time, not time since conception.",
+    },
+    {
       term: "Gestational age",
       definition:
         "How far along a pregnancy is, counted in completed weeks and days from the first day of the last menstrual period. It is not the time since conception.",

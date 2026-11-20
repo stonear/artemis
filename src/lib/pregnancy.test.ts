@@ -65,3 +65,57 @@ test("calendar arithmetic crosses leap days and DST with local display dates", (
   expect(addDays("2026-03-07", 3)).toBe("2026-03-10");
   expect(localDate(new Date(2026, 0, 1, 0, 1))).toBe("2026-01-01");
 });
+
+test("28-day months and calendar months measure the same elapsed dates differently", () => {
+  const p = calculateProgress(lmp, "2026-06-05");
+  expect(p.months28).toEqual({ months: 5, days: 15 });
+  expect(p.calendarMonths).toEqual({ months: 5, days: 4 });
+  expect(p.elapsed).toBe(155);
+  expect(p.weeks * 7 + p.days).toBe(p.elapsed);
+});
+test("calendar months use actual anniversaries across a year boundary", () => {
+  expect(
+    calculateProgress({ ...lmp, date: "2025-11-20" }, "2026-01-19")
+      .calendarMonths,
+  ).toEqual({ months: 1, days: 30 });
+  expect(
+    calculateProgress({ ...lmp, date: "2025-11-20" }, "2026-01-20")
+      .calendarMonths,
+  ).toEqual({ months: 2, days: 0 });
+});
+test("month-end anniversaries clamp without drifting from the starting day", () => {
+  const settings = { ...lmp, date: "2026-01-31" };
+  for (const [date, months, days] of [
+    ["2026-02-27", 0, 27],
+    ["2026-02-28", 1, 0],
+    ["2026-03-01", 1, 1],
+    ["2026-03-30", 1, 30],
+    ["2026-03-31", 2, 0],
+  ] as const)
+    expect(calculateProgress(settings, date).calendarMonths).toEqual({
+      months,
+      days,
+    });
+});
+test("calendar months handle leap February and leap-day anniversaries", () => {
+  expect(
+    calculateProgress({ ...lmp, date: "2024-01-31" }, "2024-02-29")
+      .calendarMonths,
+  ).toEqual({ months: 1, days: 0 });
+  expect(
+    calculateProgress({ ...lmp, date: "2024-02-29" }, "2025-02-28")
+      .calendarMonths,
+  ).toEqual({ months: 12, days: 0 });
+});
+test("both month views start at zero and continue after the estimated due date", () => {
+  const start = calculateProgress(lmp, lmp.date);
+  expect(start.months28).toEqual({ months: 0, days: 0 });
+  expect(start.calendarMonths).toEqual({ months: 0, days: 0 });
+  const due = calculateProgress(lmp, "2026-10-08");
+  expect(due.months28).toEqual({ months: 10, days: 0 });
+  expect(due.calendarMonths).toEqual({ months: 9, days: 7 });
+  expect(calculateProgress(lmp, "2026-10-18").calendarMonths).toEqual({
+    months: 9,
+    days: 17,
+  });
+});

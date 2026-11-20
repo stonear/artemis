@@ -1191,3 +1191,78 @@ footer > span:last-child {
     scroll-behavior: auto !important;
   }
 }
+
+.month-comparison {
+  grid-column: 1/-1;
+  border-top: 1px solid var(--border);
+  padding: 24px 34px;
+}
+.month-comparison > h3 {
+  font-size: 1rem;
+}
+.month-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin: 17px 0 19px;
+}
+.month-counts dt {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.month-counts dt > span {
+  white-space: nowrap;
+}
+.month-counts dd {
+  font-family: "Manrope Variable", sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+.month-counts dd > span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 5px;
+}
+.month-explanation > summary {
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 25px;
+}
+.month-explanation > div {
+  max-width: 900px;
+}
+.month-explanation p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 14px;
+}
+.month-explanation strong {
+  color: var(--text);
+}
+@media (max-width: 540px) {
+  .month-comparison {
+    padding: 24px;
+  }
+  .month-counts {
+    gap: 20px;
+  }
+  .month-counts dt > span {
+    display: block;
+    font-size: 0.8rem;
+  }
+  .month-counts dd {
+    font-size: 1.1rem;
+  }
+  .month-counts dd > span {
+    display: block;
+    margin-left: 0;
+    font-size: 0.875rem;
+  }
+}

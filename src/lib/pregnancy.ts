@@ -56,10 +56,29 @@ export function calculateProgress(
   const elapsed = Math.round(
     (calendarTime(today) - calendarTime(startDate)) / dayMs,
   );
+  const start = new Date(calendarTime(startDate));
+  const end = new Date(calendarTime(today));
+  let months =
+    (end.getUTCFullYear() - start.getUTCFullYear()) * 12 +
+    end.getUTCMonth() -
+    start.getUTCMonth();
+  // Always anchor to the original day; February must not move March's anniversary.
+  const anniversary = (offset: number) => {
+    const year = start.getUTCFullYear();
+    const month = start.getUTCMonth() + offset;
+    const lastDay = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    return Date.UTC(year, month, Math.min(start.getUTCDate(), lastDay));
+  };
+  if (anniversary(months) > calendarTime(today)) months--;
+  const calendarDays = Math.round(
+    (calendarTime(today) - anniversary(months)) / dayMs,
+  );
   return {
     startDate,
     dueDate,
     elapsed,
+    months28: { months: Math.floor(elapsed / 28), days: elapsed % 28 },
+    calendarMonths: { months, days: calendarDays },
     weeks: Math.floor(elapsed / 7),
     days: elapsed % 7,
     daysRemaining: 280 - elapsed,

@@ -33,6 +33,7 @@ Production files are written to `build/`. The GitHub Pages workflow builds with 
 ## What you can do
 
 - See pregnancy age in weeks and days, trimester, and estimated due date.
+- Compare elapsed 28-day months with actual calendar months and days.
 - Open a dated timeline of pregnancy milestones.
 - Edit your dates and nickname; download or restore a validated JSON backup.
 - Choose light, dark, or system appearance.
@@ -44,6 +45,8 @@ Production files are written to `build/`. The GitHub Pages workflow builds with 
 Progress recalculates on load, at local midnight, and when the app regains focus or visibility. Your device’s local calendar determines today. Daylight-saving changes do not add or subtract a day.
 
 Last-period mode adds 280 days (40 weeks), assuming a 28-day cycle. Due-date mode counts back from your entered date. For example, 22 weeks and 3 days means 157 days of gestational age. Trimesters are weeks 0–13, 14–27, and 28 onward. Age keeps counting beyond the due date; the progress bar stops at 100%. The app does not assume a birth has occurred.
+
+The dashboard also shows two month counts from the same pregnancy dating start. A **28-day month** is four weeks, so 40 weeks makes 10 four-week blocks. A **calendar month** follows actual dates and varies from 28 to 31 days. For example, January 1 to February 1 is one calendar month but one 28-day block plus three days. Calendar anniversaries stay anchored to the original day; if that day is missing, the last day of the month is used (January 31 → February 28/29 → March 31). These counts show completed months and remaining days, continue beyond the due date, and do not change gestational weeks or the due date. The 28-day counting shortcut is separate from the menstrual-cycle assumption in last-period mode.
 
 **Due dates are estimates.** For other cycle lengths or revised dating, use the estimated due date provided by your doctor or midwife. Artemis provides tracking, not medical advice. Read more from [NHS](https://www.nhs.uk/pregnancy/finding-out/due-date-calculator/) and [ACOG](https://www.acog.org/womens-health/faqs/how-your-fetus-grows-during-pregnancy).
 
